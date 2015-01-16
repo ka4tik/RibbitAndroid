@@ -110,30 +110,18 @@ public class EditFriendsActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        if(getListView().isItemChecked(position))
-        {
-            //add new friend
+        if(getListView().isItemChecked(position)) //add new friend
             mFriendsRelation.add(mUsers.get(position));
-            mCurrentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if(e!=null)
-                        Log.d(TAG,e.getMessage());
-                }
-            });
-        }
-        else
-        {
-            //remove
+        else//remove
             mFriendsRelation.remove(mUsers.get(position));
-            mCurrentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if(e!=null)
-                        Log.d(TAG,e.getMessage());
-                }
-            });
-        }
+
+        mCurrentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e!=null)
+                    Log.d(TAG,e.getMessage());
+            }
+        });
 
     }
 }
