@@ -1,6 +1,5 @@
 package in.ka4tik.ribbit;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 
@@ -65,10 +61,10 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
-        if(position==1)
-            fragment=new InboxFragment();
+        if (position == 0)
+            fragment = new InboxFragment();
         else
-            fragment=new FriendsFragment();
+            fragment = new FriendsFragment();
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
@@ -77,10 +73,10 @@ public class MainActivity extends ActionBarActivity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = "Inbox";
                 break;
-            case 2:
+            case 1:
                 mTitle = "Friends";
                 break;
 
@@ -117,6 +113,11 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_logout) {
             ParseUser.logOut();
             navigateToLogin();
+            return true;
+        }
+        if (id == R.id.action_edit_friends) {
+            Intent intent = new Intent(MainActivity.this, EditFriendsActivity.class);
+            startActivity(intent);
             return true;
         }
 

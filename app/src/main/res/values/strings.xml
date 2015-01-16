@@ -16,5 +16,6 @@
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_edit_friends">Edit Friends</string>
 
 </resources>
