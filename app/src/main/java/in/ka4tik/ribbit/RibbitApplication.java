@@ -3,7 +3,6 @@ package in.ka4tik.ribbit;
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 /**
  * Created by ka4tik on 1/16/15.
@@ -11,8 +10,7 @@ import com.parse.ParseObject;
 public class RibbitApplication extends Application {
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
