@@ -1,7 +1,12 @@
 package in.ka4tik.ribbit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -10,13 +15,102 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.parse.ParseUser;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     public static final String TAG = MainActivity.class.getSimpleName();
+    public static final int TAKE_PHOTO_REQUEST=0;
+    public static final int TAKE_VIDEO_REQUEST=1;
+    public static final int CHOOSE_PHOTO_REQUEST=2;
+    public static final int CHOOSE_VIDEO_REQUEST=3;
+
+    public static final int MEDIA_TYPE_IMAGE =4;
+    public static final int MEDIA_TYPE_VIDEO =5;
+
+    protected Uri mMediaUri;
+
+    protected DialogInterface.OnClickListener mDialogListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch(which)
+            {
+                case 0://Take picture
+                    Intent takePhotoIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if(mMediaUri ==null){
+                        Toast.makeText(MainActivity.this,"There was a problem acessing your device's external storage",Toast.LENGTH_LONG);
+                    }
+                    else {
+                        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
+                        startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+                    }
+                    break;
+                case 1://Take video
+                    Intent videoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    break;
+                case 2://Choose picture
+                    break;
+                case 3://Choose video
+                    break;
+            }
+        }
+
+        private Uri getOutputMediaFileUri(int mediaType) {
+            if(isExternalStorageAvailable())
+            {
+                //get the URI
+                String appName= MainActivity.this.getString(R.string.app_name);
+                File mediaStorageDir= new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),appName);
+
+                if(!mediaStorageDir.exists()){
+                    if(!mediaStorageDir.mkdirs()){
+                        Log.e(TAG,"Failed to create directory");
+                    }
+                }
+
+                File mediaFile;
+                Date now =new Date();
+                String timestamp=new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+                String path=mediaStorageDir.getPath() + File.separator;
+                if(mediaType==MEDIA_TYPE_IMAGE)
+                    mediaFile =new File(path+ "IMG_" +  timestamp + ".jpg");
+
+                else if(mediaType==MEDIA_TYPE_VIDEO)
+                    mediaFile=new File(path+ "VID_" +  timestamp+ ".mp4");
+                else
+                    return null;
+
+                Log.d("TAG","File . " + Uri.fromFile(mediaFile));
+                return Uri.fromFile(mediaFile);
+
+            }
+            else
+                return null;
+
+        }
+
+        private boolean isExternalStorageAvailable()
+        {
+            String state= Environment.getExternalStorageState();
+            if(state.equals(Environment.MEDIA_MOUNTED))
+                return true;
+            else
+                return false;
+        }
+    };
+
+
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -48,6 +142,25 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
     }
+
+
+    protected void onActivityResult(int requestCode,int resultCode,Intent data)
+    {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode==RESULT_OK)
+        {
+            //add it to gallery
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            mediaScanIntent.setData(mMediaUri);
+            sendBroadcast(mediaScanIntent);
+        }
+        else if(resultCode!=RESULT_CANCELED)
+        {
+            Toast.makeText(this,"something bad happened",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
     public void navigateToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -119,6 +232,19 @@ public class MainActivity extends ActionBarActivity
             Intent intent = new Intent(MainActivity.this, EditFriendsActivity.class);
             startActivity(intent);
             return true;
+        }
+
+        if(id==R.id.action_camera)
+        {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            CharSequence[] items=new CharSequence[4];
+            items[0]="Take Photo";
+            items[1]="Take Video";
+            items[2]="Choose Photo";
+            items[3]="Choose Photo";
+            builder.setItems(items,mDialogListener);
+            AlertDialog dialog=builder.create();
+            dialog.show();
         }
 
 
