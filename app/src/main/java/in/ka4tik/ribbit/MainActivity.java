@@ -210,6 +210,10 @@ public class MainActivity extends ActionBarActivity
                 mediaScanIntent.setData(mMediaUri);
                 sendBroadcast(mediaScanIntent);
             }
+
+            Intent recipientsIntent = new Intent(this,RecipientsActivity.class);
+            recipientsIntent.setData(mMediaUri);
+            startActivity(recipientsIntent);
         }
         else if(resultCode!=RESULT_CANCELED)
         {
