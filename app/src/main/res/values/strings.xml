@@ -18,5 +18,6 @@
     <string name="title_activity_signup">SignupActivity</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
     <string name="title_activity_recipients">Choose Recipients</string>
+    <string name="title_activity_view_image">Ribbit</string>
 
 </resources>

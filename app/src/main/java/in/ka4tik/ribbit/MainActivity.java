@@ -123,10 +123,7 @@ public class MainActivity extends ActionBarActivity
         private boolean isExternalStorageAvailable()
         {
             String state= Environment.getExternalStorageState();
-            if(state.equals(Environment.MEDIA_MOUNTED))
-                return true;
-            else
-                return false;
+            return state.equals(Environment.MEDIA_MOUNTED);
         }
     };
 
@@ -163,7 +160,6 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
     }
-
 
     protected void onActivityResult(int requestCode,int resultCode,Intent data)
     {
