@@ -27,8 +27,6 @@ import java.util.List;
 
 public class RecipientsActivity extends ListActivity {
 
-
-
     public static final String TAG = RecipientsActivity.class.getSimpleName();
 
     protected List<ParseUser> mFriends;
@@ -51,8 +49,10 @@ public class RecipientsActivity extends ListActivity {
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_recipients, menu);
         mSendMenuItem = menu.getItem(0);
