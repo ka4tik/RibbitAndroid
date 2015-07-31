@@ -1,5 +1,7 @@
 package in.ka4tik.ribbit;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity {
 
     protected TextView mSignUpTextView;
     private EditText mUserName;
@@ -25,7 +27,6 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
 
         mSignUpTextView = (TextView) findViewById(R.id.signup);
@@ -60,13 +61,11 @@ public class LoginActivity extends ActionBarActivity {
 
                 } else {
                     //Login
-                    setSupportProgressBarIndeterminateVisibility(true);
 
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser parseUser, ParseException e) {
 
-                            setSupportProgressBarIndeterminateVisibility(false);
 
                             if (e == null)//success
                             {

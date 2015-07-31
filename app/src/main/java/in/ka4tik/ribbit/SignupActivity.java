@@ -1,5 +1,7 @@
 package in.ka4tik.ribbit;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 
-public class SignupActivity extends ActionBarActivity {
+public class SignupActivity extends Activity {
 
     private EditText mUserName;
     private EditText mPassword;

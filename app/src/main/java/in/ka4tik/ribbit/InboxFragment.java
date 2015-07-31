@@ -49,39 +49,51 @@ public class InboxFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
+        if(ParseUser.getCurrentUser()!=null) {
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseConstants.CLASS_MESSAGES);
+            query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
+            query.orderByDescending(ParseConstants.KEY_CREATED_AT);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> messages, ParseException e) {
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(ParseConstants.CLASS_MESSAGES);
-        query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
-        query.orderByDescending(ParseConstants.KEY_CREATED_AT);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> messages, ParseException e) {
+                    if (e == null) {
+                        mMessages = messages;
+                        if (getListView().getAdapter() == null) {
+                            MessageAdapter adapter = new MessageAdapter(
+                                    getListView().getContext(),
+                                    messages);
+                            setListAdapter(adapter);
+                        } else {
+                            //refill the adapter
+                            ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
 
-                if (e == null) {
-                    mMessages = messages;
-                    if (getListView().getAdapter() == null) {
-                        MessageAdapter adapter = new MessageAdapter(
-                                getListView().getContext(),
-                                messages);
-                        setListAdapter(adapter);
+                        }
                     } else {
-                        //refill the adapter
-                        ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
-
+                        Log.d(TAG, e.getMessage());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                        builder.setMessage(e.getMessage())
+                                .setTitle("Something wrong happened")
+                                .setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
-                } else {
-                    Log.d(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
-                    builder.setMessage(e.getMessage())
-                            .setTitle("Something wrong happened")
-                            .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
                 }
-            }
-        });
-    }
+            });
+        }
+        else
+        {
+           navigateToLogin();
+        }
 
+
+    }
+    public void navigateToLogin() {
+        Intent intent = new Intent(getActivity(),LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
