@@ -25,14 +25,15 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-//        if (convertView == null) {
+        if (convertView == null) {
         convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
 
         holder = new ViewHolder();
         holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
         holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
-//        } else
-//            holder = (ViewHolder) convertView.getTag();
+            convertView.setTag(holder);
+        } else
+            holder = (ViewHolder) convertView.getTag();
 
         ParseObject message = mMessages.get(position);
         if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE))
@@ -41,6 +42,12 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
             holder.iconImageView.setImageResource(R.drawable.ic_videocam_black_24dp);
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
         return convertView;
+    }
+
+    public void refill(List<ParseObject> messages) {
+        mMessages.clear();
+        mMessages.addAll(messages);
+        notifyDataSetChanged();
     }
 
     private static class ViewHolder {

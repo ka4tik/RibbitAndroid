@@ -61,10 +61,16 @@ public class InboxFragment extends ListFragment {
 
                 if (e == null) {
                     mMessages = messages;
-                    MessageAdapter adapter = new MessageAdapter(
-                            getListView().getContext(),
-                            messages);
-                    setListAdapter(adapter);
+                    if (getListView().getAdapter() == null) {
+                        MessageAdapter adapter = new MessageAdapter(
+                                getListView().getContext(),
+                                messages);
+                        setListAdapter(adapter);
+                    } else {
+                        //refill the adapter
+                        ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
+
+                    }
                 } else {
                     Log.d(TAG, e.getMessage());
                     AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
