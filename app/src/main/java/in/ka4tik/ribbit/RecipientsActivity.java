@@ -105,15 +105,14 @@ public class RecipientsActivity extends ListActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
             ParseObject message = createMessage();
-            if(message == null){
+            if (message == null) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("There was an error with the file selected.Please select another file");
                 builder.setTitle("We are sorry!");
                 builder.setPositiveButton(android.R.string.ok, null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
-            }
-            else {
+            } else {
                 send(message);
                 finish();
             }
@@ -125,36 +124,33 @@ public class RecipientsActivity extends ListActivity {
 
     protected ParseObject createMessage() {
         ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
-        message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
-        message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
+        message.put(ParseConstants.KEY_SENDER_ID, ParseUser.getCurrentUser().getObjectId());
+        message.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientsIds());
-        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
+        message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
 
         byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
-        if(fileBytes  == null){
+        if (fileBytes == null) {
             return null;
-        }
-        else{
-            if(mFileType.equals(ParseConstants.TYPE_IMAGE)){
-                fileBytes =  FileHelper.reduceImageForUpload(fileBytes);
+        } else {
+            if (mFileType.equals(ParseConstants.TYPE_IMAGE)) {
+                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
             }
-            String fileName = FileHelper.getFileName(this,mMediaUri,mFileType);
-            ParseFile file = new ParseFile(fileName,fileBytes);
-            message.put(ParseConstants.KEY_FILE,file);
+            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+            ParseFile file = new ParseFile(fileName, fileBytes);
+            message.put(ParseConstants.KEY_FILE, file);
 
             return message;
         }
     }
 
-    protected void send(ParseObject message){
+    protected void send(ParseObject message) {
         message.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e==null) {
+                if (e == null) {
                     Toast.makeText(RecipientsActivity.this, "Message sent!", Toast.LENGTH_LONG);
-                }
-                else
-                {
+                } else {
                     Log.d(TAG, e.getMessage());
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(e.getMessage())
@@ -168,10 +164,10 @@ public class RecipientsActivity extends ListActivity {
 
     }
 
-    protected ArrayList<String> getRecipientsIds(){
+    protected ArrayList<String> getRecipientsIds() {
         ArrayList<String> recipientsIds = new ArrayList<String>();
-        for(int i=0;i<getListView().getCount();i++){
-            if(getListView().isItemChecked(i)){
+        for (int i = 0; i < getListView().getCount(); i++) {
+            if (getListView().isItemChecked(i)) {
                 recipientsIds.add(mFriends.get(i).getObjectId());
             }
         }

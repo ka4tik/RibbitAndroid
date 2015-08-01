@@ -45,8 +45,7 @@ public class ImageResizer {
             // Landscape image. ratio (width/height) is > 1
             targetHeight = shorterSideTarget;
             targetWidth = Math.round(shorterSideTarget * ratio);
-        }
-        else {
+        } else {
             // Portrait image. ratio (width/height) is < 1
             targetWidth = shorterSideTarget;
             targetHeight = Math.round(shorterSideTarget / ratio);

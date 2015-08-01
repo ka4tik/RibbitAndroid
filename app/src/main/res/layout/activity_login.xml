@@ -1,95 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/background_fill">
+    style="@style/AuthBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
         android:id="@+id/backgroundImageView"
-        android:background="@drawable/background" />
+        style="@style/AuthBackgroundImage" />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:layout_marginTop="32dp"
         android:id="@+id/title"
-        android:textSize="60sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true" />
+        style="@style/AuthTitle" />
 
     <LinearLayout
         android:id="@+id/editTextLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-
-        android:background="@android:color/white"
-        android:layout_below="@+id/title">
+        style="@style/AuthFieldContainer">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/username"
-            android:inputType="text"
-            android:hint="@string/username_hint"
-            android:textColorHint="@color/light_grey"
-            android:textSize="17sp"
-            />
+            style="@style/AuthEditText"
+            android:hint="@string/username_hint" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
             android:id="@+id/password"
+            style="@style/AuthEditText"
             android:hint="@string/password_hint"
-            android:textColorHint="@color/light_grey"
-            android:textSize="17sp"
-         />
+            android:inputType="textPassword" />
 
     </LinearLayout>
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SIGN IN"
-            android:id="@+id/login"
-            android:hint="Login"
-            android:layout_below="@id/editTextLayout"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/button_custom"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textSize="13sp"
-            android:textColor="@color/text_color"/>
+    <Button
+        android:id="@+id/login"
+        style="@style/AuthButton"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextLayout"
+        android:text="SIGN IN" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Don't have an account? SignUp!"
-            android:id="@+id/signup"
-            android:layout_below="@+id/login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:textColor="@android:color/white"
-            />
-
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="Don't have an account? SignUp!"
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>

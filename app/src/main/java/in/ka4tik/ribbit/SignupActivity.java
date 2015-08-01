@@ -1,11 +1,9 @@
 package in.ka4tik.ribbit;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +19,7 @@ public class SignupActivity extends Activity {
     private EditText mPassword;
     private EditText mEmail;
     private Button mSignUpButton;
+    private Button mCancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,14 @@ public class SignupActivity extends Activity {
         mPassword = (EditText) findViewById(R.id.password);
         mEmail = (EditText) findViewById(R.id.email);
         mSignUpButton = (Button) findViewById(R.id.signupButton);
+        mCancelButton = (Button) findViewById(R.id.cancelButton);
+
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

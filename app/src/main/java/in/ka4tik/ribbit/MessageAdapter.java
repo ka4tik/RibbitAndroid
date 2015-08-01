@@ -26,11 +26,11 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
 
-        holder = new ViewHolder();
-        holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
-        holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
+            holder = new ViewHolder();
+            holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
+            holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
             convertView.setTag(holder);
         } else
             holder = (ViewHolder) convertView.getTag();

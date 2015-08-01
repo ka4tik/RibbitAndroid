@@ -29,7 +29,7 @@ public class FileHelper {
                 inStream = context.getContentResolver().openInputStream(uri);
                 outStream = new ByteArrayOutputStream();
 
-                byte[] bytesFromFile = new byte[1024*1024]; // buffer size (1 MB)
+                byte[] bytesFromFile = new byte[1024 * 1024]; // buffer size (1 MB)
                 int bytesRead = inStream.read(bytesFromFile);
                 while (bytesRead != -1) {
                     outStream.write(bytesFromFile, 0, bytesRead);
@@ -37,25 +37,20 @@ public class FileHelper {
                 }
 
                 fileBytes = outStream.toByteArray();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
-            }
-            finally {
+            } finally {
                 try {
                     inStream.close();
                     outStream.close();
-                }
-                catch (IOException e) { /*( Intentionally blank */ }
+                } catch (IOException e) { /*( Intentionally blank */ }
             }
-        }
-        else {
+        } else {
             try {
                 File file = new File(uri.getPath());
                 FileInputStream fileInput = new FileInputStream(file);
                 fileBytes = IOUtils.toByteArray(fileInput);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
             }
         }
@@ -71,8 +66,7 @@ public class FileHelper {
         byte[] reducedData = outputStream.toByteArray();
         try {
             outputStream.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             // Intentionally blank
         }
 
@@ -84,8 +78,7 @@ public class FileHelper {
 
         if (fileType.equals(ParseConstants.TYPE_IMAGE)) {
             fileName += "png";
-        }
-        else {
+        } else {
 
             // For video, we want to get the actual file extension
             if (uri.getScheme().equals("content")) {
@@ -94,8 +87,7 @@ public class FileHelper {
                 int slashIndex = mimeType.indexOf("/");
                 String fileExtension = mimeType.substring(slashIndex + 1);
                 fileName += fileExtension;
-            }
-            else {
+            } else {
                 fileName = uri.getLastPathSegment();
             }
         }
