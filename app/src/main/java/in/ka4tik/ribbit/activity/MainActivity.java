@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -26,6 +26,12 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import in.ka4tik.ribbit.R;
+import in.ka4tik.ribbit.fragments.FriendsFragment;
+import in.ka4tik.ribbit.fragments.InboxFragment;
+import in.ka4tik.ribbit.fragments.NavigationDrawerFragment;
+import in.ka4tik.ribbit.utils.ParseConstants;
 
 
 public class MainActivity extends ActionBarActivity

@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.fragments;
 
 /**
  * Created by ka4tik on 1/17/15.
@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import in.ka4tik.ribbit.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -269,7 +271,7 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
-    public static interface NavigationDrawerCallbacks {
+    public interface NavigationDrawerCallbacks {
         /**
          * Called when an item in the navigation drawer is selected.
          */

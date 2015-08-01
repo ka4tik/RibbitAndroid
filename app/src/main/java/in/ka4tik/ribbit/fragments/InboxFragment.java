@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +20,13 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import in.ka4tik.ribbit.R;
+import in.ka4tik.ribbit.activity.LoginActivity;
+import in.ka4tik.ribbit.activity.MainActivity;
+import in.ka4tik.ribbit.activity.ViewImageActivity;
+import in.ka4tik.ribbit.adapters.MessageAdapter;
+import in.ka4tik.ribbit.utils.ParseConstants;
 
 
 public class InboxFragment extends ListFragment {

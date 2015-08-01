@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.utils;
 
 public final class ParseConstants {
     // Class name

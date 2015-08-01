@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="in.ka4tik.ribbit.ViewImageActivity">
+    tools:context="in.ka4tik.ribbit.activity.ViewImageActivity">
 
     <ImageView
         android:id="@+id/imageView"

@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/RibbitTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,30 +26,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"></activity>
         <activity
-            android:name=".SignupActivity"
+            android:name=".activity.SignupActivity"
             android:label="@string/title_activity_signup"
-            android:parentActivityName=".LoginActivity"></activity>
+            android:parentActivityName=".activity.LoginActivity"></activity>
         <activity
-            android:name=".EditFriendsActivity"
+            android:name=".activity.EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"></activity>
         <activity
-            android:name=".RecipientsActivity"
+            android:name=".activity.RecipientsActivity"
             android:label="@string/title_activity_recipients"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.ka4tik.ribbit.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".ViewImageActivity"
+            android:name=".activity.ViewImageActivity"
             android:label="@string/title_activity_view_image"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.ka4tik.ribbit.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
     </application>
 

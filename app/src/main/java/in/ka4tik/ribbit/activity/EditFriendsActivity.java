@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.activity;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -17,6 +17,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.List;
+
+import in.ka4tik.ribbit.R;
+import in.ka4tik.ribbit.utils.ParseConstants;
 
 public class EditFriendsActivity extends ListActivity {
 

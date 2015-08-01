@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.activity;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -23,6 +23,10 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import in.ka4tik.ribbit.R;
+import in.ka4tik.ribbit.utils.FileHelper;
+import in.ka4tik.ribbit.utils.ParseConstants;
 
 
 public class RecipientsActivity extends ListActivity {

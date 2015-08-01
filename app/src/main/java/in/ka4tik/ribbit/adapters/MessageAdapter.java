@@ -1,4 +1,4 @@
-package in.ka4tik.ribbit;
+package in.ka4tik.ribbit.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 
 import java.util.List;
+
+import in.ka4tik.ribbit.R;
+import in.ka4tik.ribbit.utils.ParseConstants;
 
 public class MessageAdapter extends ArrayAdapter<ParseObject> {
     protected Context mContext;
